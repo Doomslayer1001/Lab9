@@ -1,3 +1,5 @@
+import java.util.HashMap;
+
 /**
  * Class Room - a room in an adventure game.
  *
@@ -15,10 +17,7 @@
 public class Room 
 {
     public String description;
-    public Room northExit;
-    public Room southExit;
-    public Room eastExit;
-    public Room westExit;
+    private HashMap<String, Room> exit;
 
     /**
      * Create a room described "description". Initially, it has
@@ -29,8 +28,38 @@ public class Room
     public Room(String description) 
     {
         this.description = description;
+        exit = new HashMap<>(); 
     }
-
+    public Room getExit(String direction){
+        Room nextRoom = exit.get(direction);
+        return nextRoom;
+    }
+    //public Room getExit(String direction){
+     //   Room nextRoom = exit.get(direction);
+        //if(direction.equals("north")) {
+        //    nextRoom = northExit;
+        //}
+        //if(direction.equals("east")) {
+        //   nextRoom = eastExit;
+        //}
+        //if(direction.equals("south")) {
+        //    nextRoom = southExit;
+        //}
+        //if(direction.equals("west")) {
+        //    nextRoom = westExit;
+        //}
+     //   return nextRoom;
+    //}
+    public String getLongDescription(){
+        return "You are " + description + ".\n" + getExitString();
+    }
+    private String getExitString(){
+        String exitString = "\nExit";
+        for(String direction : exit.keySet()) {
+            exitString += direction;
+        }
+        return exitString;
+    }
     /**
      * Define the exits of this room.  Every direction either leads
      * to another room or is null (no exit there).
@@ -39,20 +68,9 @@ public class Room
      * @param south The south exit.
      * @param west The west exit.
      */
-    public void setExits(Room north, Room east, Room south, Room west) 
+    public void setExit(String direction, Room neighbor) 
     {
-        if(north != null) {
-            northExit = north;
-        }
-        if(east != null) {
-            eastExit = east;
-        }
-        if(south != null) {
-            southExit = south;
-        }
-        if(west != null) {
-            westExit = west;
-        }
+        exit.put(direction, neighbor);
     }
 
     /**
