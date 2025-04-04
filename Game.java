@@ -43,20 +43,28 @@ public class Game
         lab = new Room("in a computing lab");
         office = new Room("in the computing admin office");
         
+        // create items
+        Item flashlight = new Item("Flashlight", "A small, battery-powered flashlight", 0.5);
+        Item book = new Item("Old Book", "An ancient book with a cracked cover", 1.2);
+        
         // initialise room exits
         outside.setExit("east",theater);
         outside.setExit("south",lab);
         outside.setExit("west",pub);
+        outside.setItem(book);
         
         theater.setExit("west", outside);
+        theater.setItem(book);
         
         pub.setExit("east", outside);
+        pub.setItem(flashlight);
         
         lab.setExit("north",outside);
         lab.setExit("east", office);
+        lab.setItem(book);
         
         office.setExit("west", lab);
-        
+        office.setItem(book);
 
         currentRoom = outside;  // start game outside
     }
@@ -93,9 +101,11 @@ public class Game
         System.out.print("Exits: ");
         printLocationInfo();
     }
+    
     private void printLocationInfo(){        
         System.out.println(currentRoom.getLongDescription());
     }
+    
     /**
      * Given a command, process (that is: execute) the command.
      * @param command The command to be processed.
@@ -186,3 +196,4 @@ public class Game
         }
     }
 }
+//

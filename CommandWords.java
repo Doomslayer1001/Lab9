@@ -38,6 +38,7 @@ public class CommandWords
         // if we get here, the string was not found in the commands
         return false;
     }
+    
     public String showAll(){
         String allCommands = "";
         for ( String command : validCommands){
