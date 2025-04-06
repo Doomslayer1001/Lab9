@@ -212,5 +212,5 @@ public class Game
         }
     }
 }
-//Yes it work
-//when say back twice it ask you have not fone anywhere
+//24)Yes it work
+//25)first time send you back to otuside but when say back twice it ask you have not gone anywhere
