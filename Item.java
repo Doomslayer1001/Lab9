@@ -20,29 +20,8 @@ public class Item
         this.description = description;
         this.weight = weight;
     }
-
-    /**
-     * An example of a method - replace this comment with your own
-     *
-     * @param  y  a sample parameter for a method
-     * @return    the sum of x and y
-     */
-    public String getName()
-    {
-        return name;
-    }
     
-    public String getDescription()
-    {
-        return description;
-    }
-    
-    public double getWeight()
-    {
-        return weight;
-    }
-    
-    public String toString() {
+    public String  getDescription() {
         return name + ": " + description + " (Weight: " + weight + "kg)";
     }
     

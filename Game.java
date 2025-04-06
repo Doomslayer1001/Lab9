@@ -19,7 +19,7 @@ public class Game
 {
     private Parser parser;
     private Room currentRoom;
-        
+    private Room previousRoom;    
     /**
      * Create the game and initialise its internal map.
      */
@@ -47,24 +47,26 @@ public class Game
         Item flashlight = new Item("Flashlight", "A small, battery-powered flashlight", 0.5);
         Item book = new Item("Old Book", "An ancient book with a cracked cover", 1.2);
         
+        lab.addItem(flashlight);
+        pub.addItem(book);
+        
         // initialise room exits
         outside.setExit("east",theater);
         outside.setExit("south",lab);
         outside.setExit("west",pub);
-        outside.setItem(book);
+        
         
         theater.setExit("west", outside);
-        theater.setItem(book);
+        
         
         pub.setExit("east", outside);
-        pub.setItem(flashlight);
-        
+                
         lab.setExit("north",outside);
         lab.setExit("east", office);
-        lab.setItem(book);
+        
         
         office.setExit("west", lab);
-        office.setItem(book);
+        
 
         currentRoom = outside;  // start game outside
     }
@@ -136,9 +138,22 @@ public class Game
         else if (commandWord.equals("eat")) {
             System.out.println("You have eaten now and you are not hungry any more.");
         }
+        else if (commandWord.equals("back")) {
+        goBack();
+    }
         return wantToQuit;
     }
-
+    
+    private void goBack() {
+    if (previousRoom == null) {
+        System.out.println("You haven't gone anywhere yet.");
+    } else {
+        Room temp = currentRoom;
+        currentRoom = previousRoom;
+        previousRoom = temp;
+        printLocationInfo();
+    }
+    }
     // implementations of user commands:
 
     /**
@@ -175,6 +190,7 @@ public class Game
             System.out.println("There is no door!");
         }
         else {
+            previousRoom = currentRoom;
             currentRoom = nextRoom;
             printLocationInfo();
         }
@@ -196,4 +212,5 @@ public class Game
         }
     }
 }
-//
+//Yes it work
+//when say back twice it ask you have not fone anywhere
